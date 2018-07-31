@@ -45,10 +45,6 @@ module.exports = class Deck {
         return dealtcard;
     }
 
-    deal_bridge_hands() {
-
-    }
-
     replace() {
         this.deck.unshift(this.dealt_cards.shift());
     }
