@@ -3,10 +3,10 @@ class HelloMessage extends React.Component {
       return React.createElement(
         "div",
         null,
-        "Hello ",
-        this.props.name
+        "current time: ",
+        this.props.time
       );
     }
   }
   
-  ReactDOM.render(React.createElement(HelloMessage, { name: "Taylor" }), mountNode);
+  ReactDOM.render(React.createElement(HelloMessage, { name: Date.now() }), mountNode);
