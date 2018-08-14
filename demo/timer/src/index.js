@@ -1,149 +1,58 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
+// http://tutorialzine.com/2014/07/5-practical-examples-for-learning-facebooks-react-framework/
 
-function Square(props) {
-    return (
-      <button className="square" onClick={props.onClick}>
-        {props.value}
-      </button>
-    );
+var TimerExample = React.createClass({
+
+  getInitialState: function(){
+
+      // This is called before our render function. The object that is 
+      // returned is assigned to this.state, so we can use it later.
+
+      return { elapsed: 0 };
+  },
+
+  componentDidMount: function(){
+
+      // componentDidMount is called by react when the component 
+      // has been rendered on the page. We can set the interval here:
+
+      this.timer = setInterval(this.tick, 50);
+  },
+
+  componentWillUnmount: function(){
+
+      // This method is called immediately before the component is removed
+      // from the page and destroyed. We can clear the interval here:
+
+      clearInterval(this.timer);
+  },
+
+  tick: function(){
+
+      // This function is called every 50 ms. It updates the 
+      // elapsed counter. Calling setState causes the component to be re-rendered
+
+      this.setState({elapsed: new Date() - this.props.start});
+  },
+
+  render: function() {
+      
+      // Calculate elapsed to tenth of a second:
+      var elapsed = Math.round(this.state.elapsed / 100);
+
+      // This will give a number with one digit after the decimal dot (xx.x):
+      var seconds = (elapsed / 10).toFixed(1);    
+
+      // Although we return an entire <p> element, react will smartly update
+      // only the changed parts, which contain the seconds variable.
+
+      return <p>This example was started <b>{seconds} seconds</b> ago.</p>;
   }
-  
-  class Board extends React.Component {
-    renderSquare(i) {
-      return (
-        <Square
-          value={this.props.squares[i]}
-          onClick={() => this.props.onClick(i)}
-        />
-      );
-    }
-  
-    render() {
-      return (
-        <div>
-          <div className="board-row">
-            {this.renderSquare(0)}
-            {this.renderSquare(1)}
-            {this.renderSquare(2)}
-          </div>
-          <div className="board-row">
-            {this.renderSquare(3)}
-            {this.renderSquare(4)}
-            {this.renderSquare(5)}
-          </div>
-          <div className="board-row">
-            {this.renderSquare(6)}
-            {this.renderSquare(7)}
-            {this.renderSquare(8)}
-          </div>
-        </div>
-      );
-    }
-  }
-  
-  class Game extends React.Component {
-    constructor(props) {
-      super(props);
-      this.state = {
-        history: [
-          {
-            squares: Array(9).fill(null)
-          }
-        ],
-        stepNumber: 0,
-        xIsNext: true
-      };
-    }
-  
-    handleClick(i) {
-      const history = this.state.history.slice(0, this.state.stepNumber + 1);
-      const current = history[history.length - 1];
-      const squares = current.squares.slice();
-      if (calculateWinner(squares) || squares[i]) {
-        return;
-      }
-      squares[i] = this.state.xIsNext ? "X" : "O";
-      this.setState({
-        history: history.concat([
-          {
-            squares: squares
-          }
-        ]),
-        stepNumber: history.length,
-        xIsNext: !this.state.xIsNext
-      });
-    }
-  
-    jumpTo(step) {
-      this.setState({
-        stepNumber: step,
-        xIsNext: (step % 2) === 0
-      });
-    }
-  
-    render() {
-      const history = this.state.history;
-      const current = history[this.state.stepNumber];
-      const winner = calculateWinner(current.squares);
-  
-      const moves = history.map((step, move) => {
-        const desc = move ?
-          'Go to move #' + move :
-          'Go to game start';
-        return (
-          <li key={move}>
-            <button onClick={() => this.jumpTo(move)}>{desc}</button>
-          </li>
-        );
-      });
-  
-      let status;
-      if (winner) {
-        status = "Winner: " + winner;
-      } else {
-        status = "Next player: " + (this.state.xIsNext ? "X" : "O");
-      }
-  
-      return (
-        <div className="game">
-          <div className="game-board">
-            <Board
-              squares={current.squares}
-              onClick={i => this.handleClick(i)}
-            />
-          </div>
-          <div className="game-info">
-            <div>{status}</div>
-            <ol>{moves}</ol>
-          </div>
-        </div>
-      );
-    }
-  }
-  
-  // ========================================
-  
-  ReactDOM.render(<Game />, document.getElementById("root"));
-  
-  function calculateWinner(squares) {
-    const lines = [
-      [0, 1, 2],
-      [3, 4, 5],
-      [6, 7, 8],
-      [0, 3, 6],
-      [1, 4, 7],
-      [2, 5, 8],
-      [0, 4, 8],
-      [2, 4, 6]
-    ];
-    for (let i = 0; i < lines.length; i++) {
-      const [a, b, c] = lines[i];
-      if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
-        return squares[a];
-      }
-    }
-    return null;
-  }
-  
+});
+
+ReactDOM.render(
+  <TimerExample start={Date.now()} />,
+  document.getElementById('container')
+);
