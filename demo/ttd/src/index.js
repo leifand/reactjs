@@ -98,9 +98,7 @@ class Game extends React.Component {
     return (
       <div className="game">
         <div className="game-board">
-          <Board />import React from 'react';
-            import ReactDOM from 'react-dom';
-            import './index.css';
+          <Board />
         </div>
         <div className="game-info">
           <div>{/* status */}</div>
@@ -110,11 +108,9 @@ class Game extends React.Component {
     );
   }
 }
-  
-  // ========================================
-  
-  ReactDOM.render(
-    <Game />,
-    document.getElementById('root')
-  );
+
+ReactDOM.render(
+  <Game />,
+  document.getElementById('root')
+);
   
