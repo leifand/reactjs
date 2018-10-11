@@ -1,20 +1,10 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<!--************************************************************************-->
-<!--* Playing Cards with CSS Demo                                          *-->
-<!--*                                                                      *-->
-<!--* Copyright 2001 by Mike Hall                                          *-->
-<!--* Please see http://www.brainjar.com for terms of use.                 *-->
-<!--************************************************************************-->
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-<title>BrainJar.com: Playing Cards with CSS</title>
+<title>PBR</title>
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <link href="/common/default.css" rel="stylesheet" type="text/css" />
 <style id="cardStyles" type="text/css">
-
-/******************************************************************************
-* Styles for playing cards.                                                   *
-******************************************************************************/
 
 .card {
   background-image: url("graphics/cardback.gif");
@@ -80,9 +70,6 @@
 .spotC4 { position: absolute; left: 2.50em; top: 2.5em; }
 .spotC5 { position: absolute; left: 2.50em; top: 3.5em; }
 
-/******************************************************************************
-* Miscellaneous styles.                                                       *
-******************************************************************************/
 
 body {
   background-color: #40a040;
@@ -92,12 +79,6 @@ body {
 </style>
 <script type="text/javascript">//<![CDATA[
 
-//*****************************************************************************
-// Do not remove this notice.
-//
-// Copyright 2001 by Mike Hall.
-// See http://www.brainjar.com for terms of use.                                                                        *
-//*****************************************************************************
 
 var minSize = 8;
 
@@ -137,23 +118,12 @@ function resizeCards(d) {
 
 <div id="demoBox" style="background-color:#ffffff;">
 
-<h3>CSS Playing Cards Demo</h3>
-
-<p>This page demonstrates the CSS rules and HTML necessary to graphically
-represent every rank of playing card in a standard deck.</p>
-
-<p>The links below allow you to dynamically change the <code>font-size</code>
-setting on the <code>card</code> class which alters the size of the cards and
-elements within.</p>
 
 <p>
 <a href="#" onclick="return resizeCards(-2)">smaller</a>
 |
 <a href="#" onclick="return resizeCards(+2)">larger</a>
 </p>
-
-<p>Use your browser's <code>View Source</code> option to see the full source
-code.</p>
 
 </div>
 
